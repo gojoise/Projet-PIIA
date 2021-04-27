@@ -40,7 +40,7 @@ public class Main extends Application {
 		FXMLLoader loader = new FXMLLoader();
 		//On lui spécifie le chemin relatif à notre classe
 		//du fichier FXML a charger : dans le sous-dossier view
-		loader.setLocation(Main.class.getResource("MainWindow.fxml"));
+		loader.setLocation(Main.class.getResource("vue/MainWindow.fxml"));
 		try {
 			//Le chargement nous donne notre conteneur
 			conteneurPrincipal = loader.load();
@@ -56,7 +56,7 @@ public class Main extends Application {
 	}
 	 private void initialisationContenu() {
 	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(Main.class.getResource("ZoneDessin.fxml"));
+	        loader.setLocation(Main.class.getResource("vue/ZoneDessin.fxml"));
 	        try {
 	            //Nous récupérons notre conteneur qui contiendra les données
 	            //Pour rappel, c'est un AnchorPane...
