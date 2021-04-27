@@ -22,7 +22,7 @@ public class Main extends Application {
 	//Il y a un BorderPane car le conteneur principal de notre IHM
 	//est un BorderPane, nous reparlerons de l'objet Stage
 	private Stage stagePrincipal;
-	private AnchorPane conteneurPrincipal;
+	private BorderPane conteneurPrincipal;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -32,6 +32,7 @@ public class Main extends Application {
 		
 		//Nous allons utiliser nos fichier FXML dans ces deux méthodes
 		initialisationConteneurPrincipal();
+		initialisationContenu();
 	}
 
 	private void initialisationConteneurPrincipal() {
@@ -53,6 +54,20 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+	 private void initialisationContenu() {
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(Main.class.getResource("ZoneDessin.fxml"));
+	        try {
+	            //Nous récupérons notre conteneur qui contiendra les données
+	            //Pour rappel, c'est un AnchorPane...
+	            AnchorPane conteneurPersonne = (AnchorPane) loader.load();
+	            //Qui nous ajoutons à notre conteneur principal
+	            //Au centre, puisque'il s'agit d'un BorderPane
+	            conteneurPrincipal.setCenter(conteneurPersonne);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
 	
 	public static void main(String[] args) {
 		launch(args);
