@@ -5,26 +5,44 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuBar layoutY="7.0" prefHeight="185.0" prefWidth="294.0">
+      <MenuBar layoutY="7.0" prefHeight="246.0" prefWidth="518.0">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Fichier">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" text="Ouvrir un projet" />
+                  <MenuItem mnemonicParsing="false" text="Créer un nouveau projet" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Sauvegarder">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="Sauvegarder le projet" />
+                  <MenuItem mnemonicParsing="false" text="Sauvegarder l'image" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" text="Ajouter un élément">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" text="Texte" />
+                  <MenuItem mnemonicParsing="false" text="Formes" />
+                  <MenuItem mnemonicParsing="false" text="Emoji" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="modifier un élément">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Déplacer" />
+                  <MenuItem mnemonicParsing="false" text="Rotation" />
+                  <MenuItem mnemonicParsing="false" text="Supprimer" />
+                  <MenuItem mnemonicParsing="false" text="Redimensionner" />
+                  <MenuItem mnemonicParsing="false" text="Couleur" />
+                  <MenuItem mnemonicParsing="false" text="Numéro du plan" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Ajouter un filtre">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Liste des filtres" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
    </children>
