@@ -23,6 +23,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.image.WritableImage;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.Canvas;
 import javafx.embed.swing.SwingFXUtils;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -38,6 +39,7 @@ public class menuControl implements Initializable{
 	//et ainsi fermer l'application
 	@FXML private  BorderPane bp;
 	private Stage stage;
+	@FXML private Canvas img;
     
     //Méthode qui sera utilisée dans l'initialisation de l'IHM
     //dans notre classe principale
@@ -74,24 +76,25 @@ public class menuControl implements Initializable{
 		stage = Main.getStage();	
 	}
 	
-//	@FXML
-//	private void saveFile(){
-//	    FileChooser fc = new FileChooser();
-//	    fc.setInitialDirectory(new File("res/maps"));
-//	    fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG","*.png"));
-//	    fc.setTitle("Save Map");
-//	    File file = fc.showSaveDialog(stage);
-//	    if(file != null){
-//	        WritableImage wi = new WritableImage((int)WIDTH,(int)HEIGHT);
-//	        try {
-//	        	SnapshotParameters sp = new SnapshotParameters();
-//	            sp.setFill(Color.TRANSPARENT);
-//	            ImageIO.write(SwingFXUtils.fromFXImage(canvas.snapshot(sp, wi), null),"png", file);
-//	        } catch (IOException e) {
-//	            e.printStackTrace();
-//	        }
-//	    }
-//	}
+	@FXML
+	private void saveFile(){
+		FileChooser fileChooser = new FileChooser();
+        
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilter = 
+                new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
+        fileChooser.getExtensionFilters().add(extFilter);
+      
+        //Show save file dialog
+        File file = fileChooser.showSaveDialog(stage);
+	    if(file != null){
+	        WritableImage wi = new WritableImage((int)img.getWidth(),(int)img.getHeight());
+	        try {                    ImageIO.write(SwingFXUtils.fromFXImage(img.snapshot(null,wi),null),"png",file);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
 	}
 
 
