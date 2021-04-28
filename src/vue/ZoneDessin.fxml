@@ -5,6 +5,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.Controleur">
    <children>
-      <Canvas height="600" layoutX="-2.0" layoutY="2.0" onMouseDragged="#deplace" onMousePressed="#attrape" onMouseReleased="#lache" width="800.0" />
+      <Canvas fx:id="img" height="600" layoutX="-2.0" layoutY="2.0" onMouseDragged="#deplace" onMousePressed="#attrape" onMouseReleased="#lache" width="800.0" />
    </children>
 </AnchorPane>

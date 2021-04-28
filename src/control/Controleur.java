@@ -3,20 +3,29 @@
  */
 package control;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import application.Disque;
 import application.FormeGeo;
 import application.Modele;
 import application.Rectangle;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import application.Modele;
-public class Controleur {
+public class Controleur implements Initializable {
 
 	private GraphicsContext gc; //GraphicsContext du Canvas de la vue
 	private double cWidth, cHeight;//Hauteur, largeur du Canvas
 	private Modele modele;
+	
+	@FXML
+	private Canvas img;
 	
 	private int formeIdx; //Index de la forme qui est en train d'être déplacée
 	private boolean enDeplacement=false; //Si une forme est en train d'être déplacée
@@ -28,17 +37,34 @@ public class Controleur {
 	 * @param cWidth largeur du canvas
 	 * @param cHeight hauteur du canvas
 	 */
-	public Controleur() {
-		modele=new Modele();
-	}
+//	public Controleur() {
+//		modele=new Modele();
+//		gc= canv.getGraphicsContext2D();
+//		//Le contrôleur est créé à partir du GraphicsContext et des dimensions du canvas
+//		this.cWidth = canv.getWidth();
+//		this.cHeight = canv.getHeight();
+//		draw(); //On dessine le canvas
+//	}
 	
-	public Controleur(GraphicsContext gc, double cWidth, double cHeight) {
-		this.gc=gc;
-		this.cWidth = cHeight;
-		this.cHeight = cHeight;
-		modele = new Modele();
-		init();
-	}
+	@Override
+    public void initialize(URL location, ResourceBundle resources) {
+	      
+        gc = img.getGraphicsContext2D();
+        gc.setFill(Color.BLACK);
+        System.out.println("color set to black");
+        gc.fillRect(50, 50, 100, 100);
+        System.out.println("draw rectangle");
+        modele=new Modele();
+        init();
+    }
+	
+//	public Controleur(GraphicsContext gc, double cWidth, double cHeight) {
+//		this.gc=gc;
+//		this.cWidth = cHeight;
+//		this.cHeight = cHeight;
+//		modele = new Modele();
+//		init();
+//	}
 	
 	/**
 	 * Pour Tester avec des formes ajoutées dès le début
