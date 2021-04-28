@@ -41,6 +41,8 @@ public class Main extends Application {
 		//Le contrôleur est créé à partir du GraphicsContext et des dimensions du canvas
 		//Controleur control=new Controleur(gc, drawArea.getWidth(), drawArea.getHeight());
 		//control.draw(); //On dessine le canvas
+		stagePrincipal.centerOnScreen();
+		stagePrincipal.show();
 		System.out.println("done !");
 	}
 
@@ -58,7 +60,6 @@ public class Main extends Application {
 			//Que nous affectons à notre Stage
 			stagePrincipal.setScene(scene);
 			//Pour l'afficher
-			stagePrincipal.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
