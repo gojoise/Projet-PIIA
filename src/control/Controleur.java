@@ -7,6 +7,7 @@ import application.Disque;
 import application.FormeGeo;
 import application.Modele;
 import application.Rectangle;
+import javafx.fxml.FXML;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -27,6 +28,10 @@ public class Controleur {
 	 * @param cWidth largeur du canvas
 	 * @param cHeight hauteur du canvas
 	 */
+	public Controleur() {
+		modele=new Modele();
+	}
+	
 	public Controleur(GraphicsContext gc, double cWidth, double cHeight) {
 		this.gc=gc;
 		this.cWidth = cHeight;
@@ -38,6 +43,7 @@ public class Controleur {
 	/**
 	 * Pour Tester avec des formes ajoutées dès le début
 	 */
+	@FXML
 	public void init() {
 		modele.add(new Rectangle(50,50,50,30));
 		modele.add(new Disque(100,100,50));
@@ -48,6 +54,7 @@ public class Controleur {
 	 * La fonction qui efface le canvas et redessine tous les éléments
 	 * stockés dans le modèle. 
 	 */
+	@FXML
 	public void draw() {
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0,0,this.cWidth,this.cHeight);
@@ -63,7 +70,9 @@ public class Controleur {
 	 * à déplacer.
 	 * @param e évènement souris
 	 */
+	@FXML
 	public void attrape(MouseEvent e) {
+		System.out.println("attrape");
 		for (int i=0; i<modele.getSize();i++) {
 			FormeGeo f=modele.get(i);
 			if (f.estDedans(e.getX(), e.getY())) {
@@ -80,7 +89,9 @@ public class Controleur {
 	 * Appelée quand l'utilisateur déplace une forme
 	 * @param e évènement souris
 	 */
+	@FXML
 	public void deplace(MouseEvent e) {
+		System.out.println("deplace");
 		if (enDeplacement) {
 			//On calcule le déplacement de la souris par rapport à sa dernière
 			//position
@@ -104,6 +115,7 @@ public class Controleur {
 	 * pour arrêter le déplacement
 	 * @param e évènement souris
 	 */
+	@FXML
 	public void lache(MouseEvent e) {
 		enDeplacement=false;
 	}
