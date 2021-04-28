@@ -23,7 +23,7 @@ public class Main extends Application {
 	//est un BorderPane, nous reparlerons de l'objet Stage
 	private Stage stagePrincipal;
 	private BorderPane conteneurPrincipal;
-	private Canvas drawArea ;
+
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -37,10 +37,7 @@ public class Main extends Application {
 		
 
 		
-		//GraphicsContext gc= drawArea.getGraphicsContext2D();
-		//Le contrôleur est créé à partir du GraphicsContext et des dimensions du canvas
-		//Controleur control=new Controleur(gc, drawArea.getWidth(), drawArea.getHeight());
-		//control.draw(); //On dessine le canvas
+
 		stagePrincipal.centerOnScreen();
 		stagePrincipal.show();
 		System.out.println("done !");
