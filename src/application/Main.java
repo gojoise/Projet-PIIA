@@ -21,7 +21,7 @@ public class Main extends Application {
 	//Ceci afin de pouvoir y positionner les éléments que nous avons fait
 	//Il y a un BorderPane car le conteneur principal de notre IHM
 	//est un BorderPane, nous reparlerons de l'objet Stage
-	private Stage stagePrincipal;
+	private static Stage stagePrincipal;
 	private BorderPane conteneurPrincipal;
 	private Canvas drawArea ;
 	
@@ -84,7 +84,7 @@ public class Main extends Application {
 		launch(args);
 	}
 
-	public Stage getStage() {
+	public static Stage getStage() {
 		return stagePrincipal;
 	}
 }
