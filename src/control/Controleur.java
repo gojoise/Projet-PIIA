@@ -17,6 +17,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import application.Modele;
 public class Controleur implements Initializable {
@@ -25,8 +26,6 @@ public class Controleur implements Initializable {
 	private double cWidth, cHeight;//Hauteur, largeur du Canvas
 	private Modele modele;
 	
-	@FXML
-	private Canvas img;
 	
 	private int formeIdx; //Index de la forme qui est en train d'être déplacée
 	private boolean enDeplacement=false; //Si une forme est en train d'être déplacée
@@ -37,6 +36,8 @@ public class Controleur implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 	      
         modele=new Modele();
+        init();
+        draw();
     }
 	
 	public void setCanvas() throws Exception {
@@ -66,7 +67,7 @@ public class Controleur implements Initializable {
             }
         });
 
-        //mainLink..setCenter(currentcanvas);
+        AnchorPane.setTopAnchor(canv, 0d);
 
         gc = canv.getGraphicsContext2D();
  }
@@ -78,7 +79,6 @@ public class Controleur implements Initializable {
 	/**
 	 * Pour Tester avec des formes ajoutées dès le début
 	 */
-	@FXML
 	public void init() {
 		modele.add(new Rectangle(50,50,50,30));
 		modele.add(new Disque(100,100,50));
@@ -89,7 +89,6 @@ public class Controleur implements Initializable {
 	 * La fonction qui efface le canvas et redessine tous les éléments
 	 * stockés dans le modèle. 
 	 */
-	@FXML
 	public void draw() {
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0,0,this.cWidth,this.cHeight);

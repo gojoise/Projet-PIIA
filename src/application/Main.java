@@ -69,6 +69,8 @@ public class Main extends Application {
 	            Controleur ctrl = loader.getController();
 	            ctrl.setMain(this);
 	            ctrl.setCanvas();
+	            
+	            
 	            conteneurPrincipal.setCenter(conteneurDessin);
 	        } catch (IOException e) {
 	            e.printStackTrace();
@@ -77,6 +79,9 @@ public class Main extends Application {
 			}
 	    }
 	 
+	public void newCanv() {
+		currentcanvas= new Canvas(800,600);
+	}
 	 
 	
 	public void quit() {
@@ -113,6 +118,10 @@ public class Main extends Application {
 	            e.printStackTrace();
 	        }
 	    }
+	}
+	
+	public Stage getStage() {
+		return stagePrincipal;
 	}
 	public static void main(String[] args) {
 		launch(args);
