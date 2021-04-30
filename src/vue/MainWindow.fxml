@@ -5,21 +5,21 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="bp" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.menuControl">
+<BorderPane fx:id="bp" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.menuControl">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Fichier">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#openFile" text="Ouvrir un projet" />
-                  <MenuItem mnemonicParsing="false" text="Créer un nouveau projet" />
+                  <MenuItem mnemonicParsing="false" onAction="#nouveau" text="Nouveau projet" />
                   <MenuItem mnemonicParsing="false" onAction="#fermer" text="Fermer" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Sauvegarder">
             <items>
               <MenuItem mnemonicParsing="false" text="Sauvegarder le projet" />
-                  <MenuItem mnemonicParsing="false" text="Sauvegarder l'image" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveFile" text="Sauvegarder l'image" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Ajouter un élément">

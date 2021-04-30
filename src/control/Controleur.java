@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import application.Disque;
 import application.FormeGeo;
+import application.Main;
 import application.Modele;
 import application.Rectangle;
 import javafx.fxml.FXML;
@@ -30,42 +31,50 @@ public class Controleur implements Initializable {
 	private int formeIdx; //Index de la forme qui est en train d'être déplacée
 	private boolean enDeplacement=false; //Si une forme est en train d'être déplacée
 	private double x_souris, y_souris; //Coordonnées précédentes de la souris
-	
-	/**
-	 * Constructeur
-	 * @param gc Le GraphicsContext du canvas de la Vue
-	 * @param cWidth largeur du canvas
-	 * @param cHeight hauteur du canvas
-	 */
-//	public Controleur() {
-//		modele=new Modele();
-//		gc= canv.getGraphicsContext2D();
-//		//Le contrôleur est créé à partir du GraphicsContext et des dimensions du canvas
-//		this.cWidth = canv.getWidth();
-//		this.cHeight = canv.getHeight();
-//		draw(); //On dessine le canvas
-//	}
+	private Main mainLink;
 	
 	@Override
     public void initialize(URL location, ResourceBundle resources) {
 	      
-        gc = img.getGraphicsContext2D();
-        gc.setFill(Color.BLACK);
-        System.out.println("color set to black");
-        gc.fillRect(50, 50, 100, 100);
-        System.out.println("draw rectangle");
         modele=new Modele();
-        init();
     }
 	
-//	public Controleur(GraphicsContext gc, double cWidth, double cHeight) {
-//		this.gc=gc;
-//		this.cWidth = cHeight;
-//		this.cHeight = cHeight;
-//		modele = new Modele();
-//		init();
-//	}
+	public void setCanvas() throws Exception {
+        Canvas canv = new Canvas(800, 600);
+
+
+//        File file = new File("src/address/Images/Default/ExempleItem.png");
+//        String localURL = file.toURI().toURL().toString();
+//        Image useImage = new Image(localURL);
+//        this.projet_PreviewImage.setImage(useImage);
+
+        canv.setOnMousePressed(e -> {
+            try {
+                attrape(e);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
+
+        canv.setOnMouseReleased(e -> lache(e));
+
+        canv.setOnMouseDragged(e -> {
+            try {
+                deplace(e);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
+
+        //mainLink..setCenter(currentcanvas);
+
+        gc = canv.getGraphicsContext2D();
+ }
 	
+	public void setMain(Main main) {
+		mainLink=main;
+	}
+
 	/**
 	 * Pour Tester avec des formes ajoutées dès le début
 	 */

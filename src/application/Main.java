@@ -2,17 +2,25 @@ package application;
 
 	
 import javafx.application.Application;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+
+import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import control.Controleur;
 import control.menuControl;
 
@@ -21,22 +29,18 @@ public class Main extends Application {
 	//Ceci afin de pouvoir y positionner les éléments que nous avons fait
 	//Il y a un BorderPane car le conteneur principal de notre IHM
 	//est un BorderPane, nous reparlerons de l'objet Stage
-	private static Stage stagePrincipal;
+	private Stage stagePrincipal;
 	private BorderPane conteneurPrincipal;
+	private Canvas currentcanvas ;
 
 	
 	@Override
 	public void start(Stage primaryStage) {
 		stagePrincipal = primaryStage;
-		//Ca ne vous rappelle pas une JFrame ?
 		stagePrincipal.setTitle("titre");
 		
-		//Nous allons utiliser nos fichier FXML dans ces deux méthodes
 		initialisationConteneurPrincipal();
-		initialisationContenu();
-		
-
-		
+		initialisationCanevas();
 
 		stagePrincipal.centerOnScreen();
 		stagePrincipal.show();
@@ -44,44 +48,73 @@ public class Main extends Application {
 	}
 
 	private void initialisationConteneurPrincipal() {
-		//On créé un chargeur de FXML
 		FXMLLoader loader = new FXMLLoader();
-		//On lui spécifie le chemin relatif à notre classe
-		//du fichier FXML a charger : dans le sous-dossier view
+
 		loader.setLocation(Main.class.getResource("../vue/MainWindow.fxml"));
 		try {
-			//Le chargement nous donne notre conteneur
 			conteneurPrincipal = loader.load();
-			//On définit une scène principale avec notre conteneur
+			menuControl mC = loader.getController();
+			mC.setMain(this);
 			Scene scene = new Scene(conteneurPrincipal);
-			//Que nous affectons à notre Stage
 			stagePrincipal.setScene(scene);
-			//Pour l'afficher
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	 private void initialisationContenu() {
+	 private void initialisationCanevas() {
 	        FXMLLoader loader = new FXMLLoader();
 	        loader.setLocation(Main.class.getResource("../vue/ZoneDessin.fxml"));
 	        try {
-	            //Nous récupérons notre conteneur qui contiendra les données
-	            //Pour rappel, c'est un AnchorPane...
 	            AnchorPane conteneurDessin = (AnchorPane) loader.load();
-	            //Qui nous ajoutons à notre conteneur principal
-	            //Au centre, puisque'il s'agit d'un BorderPane
-	            
+	            Controleur ctrl = loader.getController();
+	            ctrl.setMain(this);
+	            ctrl.setCanvas();
 	            conteneurPrincipal.setCenter(conteneurDessin);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } catch (Exception e) {
+				e.printStackTrace();
+			}
+	    }
+	 
+	 
+	
+	public void quit() {
+		//On affiche un message car on est poli.
+		Alert bye = new Alert(AlertType.INFORMATION);
+		bye.setTitle("Au revoir !");
+		bye.setHeaderText("See you soon...");
+		bye.showAndWait();
+		
+		//Et on clos le stage principal, donc l'application
+		stagePrincipal.close();
+		System.out.println("fermer !");
+	}
+	public void openImg() {
+		FileChooser fileChooser = new FileChooser();
+		File selectedFile = fileChooser.showOpenDialog(stagePrincipal);
+		System.out.println(selectedFile.toString());
+	}
+	public void saveFile() {
+		System.out.println("save");
+		FileChooser fileChooser = new FileChooser();
+        
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilter = 
+                new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
+        fileChooser.getExtensionFilters().add(extFilter);
+      
+        //Show save file dialog
+        File file = fileChooser.showSaveDialog(stagePrincipal);
+	    if(file != null){
+	        WritableImage wi = new WritableImage((int)currentcanvas.getWidth(),(int)currentcanvas.getHeight());
+	        try {                    ImageIO.write(SwingFXUtils.fromFXImage(currentcanvas.snapshot(null,wi),null),"png",file);
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
 	    }
-
+	}
 	public static void main(String[] args) {
 		launch(args);
-	}
-
-	public static Stage getStage() {
-		return stagePrincipal;
 	}
 }
