@@ -30,7 +30,7 @@ public class Main extends Application {
 	//est un BorderPane, nous reparlerons de l'objet Stage
 	private Stage stagePrincipal;
 	private BorderPane conteneurPrincipal;
-	public Canvas currentCanvas;
+	public Controleur ctrl;
 
 	
 	@Override
@@ -65,7 +65,7 @@ public class Main extends Application {
 	        loader.setLocation(Main.class.getResource("../vue/ZoneDessin.fxml"));
 	        try {
 	            BorderPane conteneurDessin = (BorderPane) loader.load();
-	            Controleur ctrl = loader.getController();
+	            ctrl = loader.getController();
 	            ctrl.setMain(this);
 	            ctrl.setCanvas(); 
 	            
@@ -110,16 +110,9 @@ public class Main extends Application {
 		  Image useImage = new Image(localURL);
 		 /* utiliser la var image pour dessiner l'image dans le canevas
 		 */
-	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(Main.class.getResource("../vue/ZoneDessin.fxml"));
-          try {
-			BorderPane conteneurDessin = (BorderPane) loader.load();
-	          Controleur ctrl = loader.getController();
-	          ctrl.setMain(this);
+	          ctrl.setMain(this);//Update du main (au cas où)
 			  ctrl.putImage(useImage);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
 
 		  /*
 		 */
@@ -134,8 +127,7 @@ public class Main extends Application {
 		fileChooser.getExtensionFilters().add(extFilter);
 
 		// récupère le canevas
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("../vue/ZoneDessin.fxml"));
+		Canvas currentCanvas=ctrl.getCanvas();
 		// Show save file dialog
 		File file = fileChooser.showSaveDialog(stagePrincipal);
 		if (file != null) {
@@ -151,10 +143,6 @@ public class Main extends Application {
 	public Stage getStage() {
 		return stagePrincipal;
 	}
-	public static void main(String[] args) {
-		launch(args);
-	}
-
 	public void setCursor(String string) {
 		switch (string) {
 		case "move":
@@ -166,4 +154,9 @@ public class Main extends Application {
 		}
 		
 	}
+	public static void main(String[] args) {
+		launch(args);
+	}
+
+
 }

@@ -10,6 +10,7 @@ import application.Disque;
 import application.FormeGeo;
 import application.Main;
 import application.Modele;
+import application.Photo;
 import application.Rectangle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,7 +35,7 @@ public class Controleur implements Initializable {
 	private boolean enDeplacement=false; //Si une forme est en train d'être déplacée
 	private double x_souris, y_souris; //Coordonnées précédentes de la souris
 	private Main mainLink;
-	
+	private Canvas currentCanvas;
 	
 	@FXML
 	private BorderPane bp;
@@ -45,7 +46,7 @@ public class Controleur implements Initializable {
     }
 	
 	public void setCanvas() {
-		Canvas currentCanvas = new Canvas(800, 600);
+		currentCanvas = new Canvas(800, 600);
 			cWidth=800;
 			cHeight=600;
 
@@ -76,7 +77,6 @@ public class Controleur implements Initializable {
         bp.setCenter(currentCanvas);
 
         gc = currentCanvas.getGraphicsContext2D();
-        mainLink.currentCanvas=currentCanvas;
         init();
         draw();
         
@@ -103,6 +103,7 @@ public class Controleur implements Initializable {
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0,0,this.cWidth,this.cHeight);
 		gc.setFill(Color.BLACK);
+		System.out.println("modele: "+modele.getSize());
 		for (int i=0; i<modele.getSize();i++) {
 			FormeGeo f=modele.get(i);
 			f.draw(gc);
@@ -153,9 +154,12 @@ public class Controleur implements Initializable {
 	}
 	
 	public void putImage(Image img) {
-		gc = mainLink.currentCanvas.getGraphicsContext2D();
-		gc.drawImage(img, 0, 0, 40, 40);
-		//modele.add(img); à ajouter pour que draw() n'oublie pas l'image
+		double baseX=0,baseY=0;
+		Photo ph = new Photo(baseX,baseY,img.getWidth(),img.getHeight(),img.getUrl());
+		
+		modele.add(ph); //à ajouter pour que draw() n'oublie pas l'image
+		System.out.println("modele: "+modele.getSize());
+		this.draw();
 	}
 	
 	/**
@@ -168,6 +172,9 @@ public class Controleur implements Initializable {
 		enDeplacement=false;
 	}
 	
-
+	public Canvas getCanvas() {
+		return currentCanvas;
+		
+	}
 	
 }

@@ -12,6 +12,7 @@ public class Modele {
 		tab = new Vector<FormeGeo>();
 	}
 	
+	
 	public FormeGeo get(int i) {return tab.get(i);}
 	
 	public int getSize() {return tab.size();}
