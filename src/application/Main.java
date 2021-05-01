@@ -99,6 +99,7 @@ public class Main extends Application {
 	public void openImg() throws MalformedURLException {
 		FileChooser fileChooser = new FileChooser();
 		File selectedFile = fileChooser.showOpenDialog(stagePrincipal);
+		if(selectedFile !=null) {
 		System.out.println(selectedFile.toString());
 		
 		/*
@@ -112,7 +113,7 @@ public class Main extends Application {
 		 */
 	          ctrl.setMain(this);//Update du main (au cas où)
 			  ctrl.putImage(useImage);
-
+		}
 
 		  /*
 		 */
