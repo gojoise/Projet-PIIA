@@ -106,40 +106,30 @@ public class Main extends Application {
 		 * utiliser la var image pour dessiner l'image dans le canevas
 		 */
 	}
+
 	public void saveFile() {
 		System.out.println("save");
 		FileChooser fileChooser = new FileChooser();
-        
-        //Set extension filter
-        FileChooser.ExtensionFilter extFilter = 
-                new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
-        fileChooser.getExtensionFilters().add(extFilter);
-        
-        //récupère le canevas
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("../vue/ZoneDessin.fxml"));
-        try {
-        	BorderPane conteneurDessin = (BorderPane) loader.load();
-        	Controleur ctrl = loader.getController();
-        	System.out.println(ctrl);
-            ctrl.setMain(this);
-            //Show save file dialog
-            File file = fileChooser.showSaveDialog(stagePrincipal);
-    	    if(file != null){
-    	        WritableImage wi = new WritableImage((int)currentCanvas.getWidth(),(int)currentCanvas.getHeight());
-    	        try {                    ImageIO.write(SwingFXUtils.fromFXImage(currentCanvas.snapshot(null,wi),null),"png",file);
-    	        } catch (IOException e) {
-    	            e.printStackTrace();
-    	        }
-    	    }
-		} catch (Exception e) {
-			e.printStackTrace();
+
+		// Set extension filter
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
+		fileChooser.getExtensionFilters().add(extFilter);
+
+		// récupère le canevas
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("../vue/ZoneDessin.fxml"));
+		// Show save file dialog
+		File file = fileChooser.showSaveDialog(stagePrincipal);
+		if (file != null) {
+			WritableImage wi = new WritableImage((int) currentCanvas.getWidth(), (int) currentCanvas.getHeight());
+			try {
+				ImageIO.write(SwingFXUtils.fromFXImage(currentCanvas.snapshot(null, wi), null), "png", file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-        
-        
-       
 	}
-	
+
 	public Stage getStage() {
 		return stagePrincipal;
 	}
