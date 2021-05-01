@@ -17,6 +17,7 @@ import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -47,11 +48,6 @@ public class Controleur implements Initializable {
 		Canvas currentCanvas = new Canvas(800, 600);
 			cWidth=800;
 			cHeight=600;
-
-//        File file = new File("src/address/Images/Default/ExempleItem.png");
-//        String localURL = file.toURI().toURL().toString();
-//        Image useImage = new Image(localURL);
-//        this.projet_PreviewImage.setImage(useImage);
 
 		currentCanvas.setOnMousePressed(e -> {
             try {
@@ -154,6 +150,12 @@ public class Controleur implements Initializable {
 			y_souris = e.getY();
 			this.draw();
 		}
+	}
+	
+	public void putImage(Image img) {
+		gc = mainLink.currentCanvas.getGraphicsContext2D();
+		gc.drawImage(img, 0, 0, 40, 40);
+		//modele.add(img); à ajouter pour que draw() n'oublie pas l'image
 	}
 	
 	/**

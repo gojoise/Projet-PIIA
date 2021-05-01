@@ -1,5 +1,6 @@
 package control;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -38,7 +39,7 @@ public class menuControl implements Initializable {
 	}
 
 	@FXML
-	public void openFile() {
+	public void openFile() throws MalformedURLException {
 		mainLink.openImg();
 	}
 

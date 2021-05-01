@@ -3,6 +3,7 @@ package application;
 	
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import javax.imageio.ImageIO;
 
@@ -16,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
@@ -64,7 +66,6 @@ public class Main extends Application {
 	        try {
 	            BorderPane conteneurDessin = (BorderPane) loader.load();
 	            Controleur ctrl = loader.getController();
-	            System.out.println(ctrl.toString());
 	            ctrl.setMain(this);
 	            ctrl.setCanvas(); 
 	            
@@ -95,15 +96,32 @@ public class Main extends Application {
 		stagePrincipal.close();
 		System.out.println("fermer !");
 	}
-	public void openImg() {
+	public void openImg() throws MalformedURLException {
 		FileChooser fileChooser = new FileChooser();
 		File selectedFile = fileChooser.showOpenDialog(stagePrincipal);
 		System.out.println(selectedFile.toString());
 		
 		/*
-		 * récupérer l'image avec le selected file tostring
-		 * puis la stocker dans une var image
-		 * utiliser la var image pour dessiner l'image dans le canevas
+		 * récupérer l'image avec le selected file tostring 
+		 */
+		String localURL = selectedFile.toURI().toURL().toString();
+		 /* puis la stocker dans une var image
+		  */
+		  Image useImage = new Image(localURL);
+		 /* utiliser la var image pour dessiner l'image dans le canevas
+		 */
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(Main.class.getResource("../vue/ZoneDessin.fxml"));
+          try {
+			BorderPane conteneurDessin = (BorderPane) loader.load();
+	          Controleur ctrl = loader.getController();
+	          ctrl.setMain(this);
+			  ctrl.putImage(useImage);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		  /*
 		 */
 	}
 
