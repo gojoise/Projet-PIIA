@@ -28,6 +28,7 @@ public class Main extends Application {
 	//est un BorderPane, nous reparlerons de l'objet Stage
 	private Stage stagePrincipal;
 	private BorderPane conteneurPrincipal;
+	public Canvas currentCanvas;
 
 	
 	@Override
@@ -63,6 +64,7 @@ public class Main extends Application {
 	        try {
 	            BorderPane conteneurDessin = (BorderPane) loader.load();
 	            Controleur ctrl = loader.getController();
+	            System.out.println(ctrl.toString());
 	            ctrl.setMain(this);
 	            ctrl.setCanvas(); 
 	            
@@ -117,14 +119,15 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("../vue/ZoneDessin.fxml"));
         try {
+        	BorderPane conteneurDessin = (BorderPane) loader.load();
         	Controleur ctrl = loader.getController();
+        	System.out.println(ctrl);
             ctrl.setMain(this);
-            Canvas currentcanvas=ctrl.getCanvas();
             //Show save file dialog
             File file = fileChooser.showSaveDialog(stagePrincipal);
     	    if(file != null){
-    	        WritableImage wi = new WritableImage((int)currentcanvas.getWidth(),(int)currentcanvas.getHeight());
-    	        try {                    ImageIO.write(SwingFXUtils.fromFXImage(currentcanvas.snapshot(null,wi),null),"png",file);
+    	        WritableImage wi = new WritableImage((int)currentCanvas.getWidth(),(int)currentCanvas.getHeight());
+    	        try {                    ImageIO.write(SwingFXUtils.fromFXImage(currentCanvas.snapshot(null,wi),null),"png",file);
     	        } catch (IOException e) {
     	            e.printStackTrace();
     	        }

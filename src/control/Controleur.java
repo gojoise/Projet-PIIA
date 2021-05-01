@@ -33,7 +33,7 @@ public class Controleur implements Initializable {
 	private boolean enDeplacement=false; //Si une forme est en train d'être déplacée
 	private double x_souris, y_souris; //Coordonnées précédentes de la souris
 	private Main mainLink;
-	private Canvas currentCanvas;
+	
 	
 	@FXML
 	private BorderPane bp;
@@ -44,7 +44,7 @@ public class Controleur implements Initializable {
     }
 	
 	public void setCanvas() {
-		currentCanvas = new Canvas(800, 600);
+		Canvas currentCanvas = new Canvas(800, 600);
 			cWidth=800;
 			cHeight=600;
 
@@ -80,6 +80,7 @@ public class Controleur implements Initializable {
         bp.setCenter(currentCanvas);
 
         gc = currentCanvas.getGraphicsContext2D();
+        mainLink.currentCanvas=currentCanvas;
         init();
         draw();
         
@@ -165,8 +166,6 @@ public class Controleur implements Initializable {
 		enDeplacement=false;
 	}
 	
-	public Canvas getCanvas() {
-		return currentCanvas;
-	}
+
 	
 }
