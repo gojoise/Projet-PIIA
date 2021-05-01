@@ -42,13 +42,16 @@ public class Controleur implements Initializable {
 	@Override
     public void initialize(URL location, ResourceBundle resources) {
 	      
-        modele=new Modele();
+        
     }
 	
-	public void setCanvas() {
-		currentCanvas = new Canvas(800, 600);
-			cWidth=800;
-			cHeight=600;
+	public void setCanvas(int x,int y) {
+		bp.setCenter(null);
+		modele=new Modele();
+		
+		currentCanvas = new Canvas(x, y);
+			cWidth=x;
+			cHeight=y;
 
 		currentCanvas.setOnMousePressed(e -> {
             try {
@@ -103,7 +106,6 @@ public class Controleur implements Initializable {
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0,0,this.cWidth,this.cHeight);
 		gc.setFill(Color.BLACK);
-		System.out.println("modele: "+modele.getSize());
 		for (int i=0; i<modele.getSize();i++) {
 			FormeGeo f=modele.get(i);
 			f.draw(gc);
@@ -158,8 +160,7 @@ public class Controleur implements Initializable {
 		Photo ph = new Photo(baseX,baseY,img.getWidth(),img.getHeight(),img.getUrl());
 		
 		modele.add(ph); //à ajouter pour que draw() n'oublie pas l'image
-		System.out.println("modele: "+modele.getSize());
-		this.draw();
+		this.draw();//update du canvas (équivalent à repaint)
 	}
 	
 	/**

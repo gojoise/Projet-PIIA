@@ -67,7 +67,7 @@ public class Main extends Application {
 	            BorderPane conteneurDessin = (BorderPane) loader.load();
 	            ctrl = loader.getController();
 	            ctrl.setMain(this);
-	            ctrl.setCanvas(); 
+	            ctrl.setCanvas(800,600); 
 	            
 	            
 	            conteneurPrincipal.setCenter(conteneurDessin);
@@ -79,9 +79,7 @@ public class Main extends Application {
 	    }
 	 
 	public void newCanv() {
-		/*
-		 * set un nouveau canvas dans le controleur
-		 */
+		ctrl.setCanvas(1280, 720);
 	}
 	 
 	

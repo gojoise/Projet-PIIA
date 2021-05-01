@@ -35,7 +35,7 @@ public class menuControl implements Initializable {
 
 	@FXML
 	public void nouveau() {
-		// mainLink.newCanv();
+		mainLink.newCanv();
 	}
 
 	@FXML

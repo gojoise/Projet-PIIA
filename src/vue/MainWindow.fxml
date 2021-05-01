@@ -11,7 +11,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Fichier">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#openFile" text="Ouvrir un projet" />
+              <MenuItem mnemonicParsing="false" onAction="#openFile" text="Ouvrir une image" />
                   <MenuItem mnemonicParsing="false" onAction="#nouveau" text="Nouveau projet" />
                   <MenuItem mnemonicParsing="false" onAction="#fermer" text="Fermer" />
             </items>
