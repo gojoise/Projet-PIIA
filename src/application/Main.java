@@ -1,28 +1,25 @@
 package application;
 
 	
-import javafx.application.Application;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.fxml.FXMLLoader;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.WritableImage;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+
 import control.Controleur;
 import control.menuControl;
+import javafx.application.Application;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.WritableImage;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class Main extends Application {
 	//Nous créons des variable de classes afin de pouvoir y accéder partout
@@ -31,7 +28,6 @@ public class Main extends Application {
 	//est un BorderPane, nous reparlerons de l'objet Stage
 	private Stage stagePrincipal;
 	private BorderPane conteneurPrincipal;
-	private Canvas currentcanvas ;
 
 	
 	@Override
@@ -65,10 +61,10 @@ public class Main extends Application {
 	        FXMLLoader loader = new FXMLLoader();
 	        loader.setLocation(Main.class.getResource("../vue/ZoneDessin.fxml"));
 	        try {
-	            AnchorPane conteneurDessin = (AnchorPane) loader.load();
+	            BorderPane conteneurDessin = (BorderPane) loader.load();
 	            Controleur ctrl = loader.getController();
 	            ctrl.setMain(this);
-	            ctrl.setCanvas();
+	            ctrl.setCanvas(); 
 	            
 	            
 	            conteneurPrincipal.setCenter(conteneurDessin);
@@ -80,7 +76,9 @@ public class Main extends Application {
 	    }
 	 
 	public void newCanv() {
-		currentcanvas= new Canvas(800,600);
+		/*
+		 * set un nouveau canvas dans le controleur
+		 */
 	}
 	 
 	
@@ -99,6 +97,12 @@ public class Main extends Application {
 		FileChooser fileChooser = new FileChooser();
 		File selectedFile = fileChooser.showOpenDialog(stagePrincipal);
 		System.out.println(selectedFile.toString());
+		
+		/*
+		 * récupérer l'image avec le selected file tostring
+		 * puis la stocker dans une var image
+		 * utiliser la var image pour dessiner l'image dans le canevas
+		 */
 	}
 	public void saveFile() {
 		System.out.println("save");
@@ -108,16 +112,29 @@ public class Main extends Application {
         FileChooser.ExtensionFilter extFilter = 
                 new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
         fileChooser.getExtensionFilters().add(extFilter);
-      
-        //Show save file dialog
-        File file = fileChooser.showSaveDialog(stagePrincipal);
-	    if(file != null){
-	        WritableImage wi = new WritableImage((int)currentcanvas.getWidth(),(int)currentcanvas.getHeight());
-	        try {                    ImageIO.write(SwingFXUtils.fromFXImage(currentcanvas.snapshot(null,wi),null),"png",file);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
+        
+        //récupère le canevas
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("../vue/ZoneDessin.fxml"));
+        try {
+        	Controleur ctrl = loader.getController();
+            ctrl.setMain(this);
+            Canvas currentcanvas=ctrl.getCanvas();
+            //Show save file dialog
+            File file = fileChooser.showSaveDialog(stagePrincipal);
+    	    if(file != null){
+    	        WritableImage wi = new WritableImage((int)currentcanvas.getWidth(),(int)currentcanvas.getHeight());
+    	        try {                    ImageIO.write(SwingFXUtils.fromFXImage(currentcanvas.snapshot(null,wi),null),"png",file);
+    	        } catch (IOException e) {
+    	            e.printStackTrace();
+    	        }
+    	    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
+        
+       
 	}
 	
 	public Stage getStage() {
@@ -125,5 +142,17 @@ public class Main extends Application {
 	}
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	public void setCursor(String string) {
+		switch (string) {
+		case "move":
+			stagePrincipal.getScene().setCursor(Cursor.MOVE);
+			break;
+
+		default:
+			break;
+		}
+		
 	}
 }

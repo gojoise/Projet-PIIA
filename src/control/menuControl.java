@@ -43,7 +43,12 @@ public class menuControl implements Initializable {
 	}
 
 	@FXML
-	private void saveFile() {
+	public void saveFile() {
 		mainLink.saveFile();
+	}
+	
+	@FXML 
+	public void setMove() {
+		mainLink.setCursor("move");
 	}
 }
