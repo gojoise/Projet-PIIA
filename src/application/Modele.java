@@ -18,4 +18,6 @@ public class Modele {
 	public int getSize() {return tab.size();}
 	
 	public void add(FormeGeo f) {tab.add(f);}
+	
+	public void setSelected(FormeGeo f ) {f.selected=true;}
 }

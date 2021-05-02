@@ -31,8 +31,8 @@
           </Menu>
             <Menu mnemonicParsing="false" text="modifier un élément">
                <items>
+                  <MenuItem mnemonicParsing="false" onAction="#setSel" text="Selectionner" />
                   <MenuItem mnemonicParsing="false" onAction="#setMove" text="Déplacer" />
-                  <MenuItem mnemonicParsing="false" text="Rotation" />
                   <MenuItem mnemonicParsing="false" text="Supprimer" />
                   <MenuItem mnemonicParsing="false" text="Redimensionner" />
                   <MenuItem mnemonicParsing="false" text="Couleur" />

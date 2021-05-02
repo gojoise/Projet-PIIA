@@ -52,4 +52,8 @@ public class menuControl implements Initializable {
 	public void setMove() {
 		mainLink.setCursor("move");
 	}
+	@FXML 
+	public void setSel() {
+		mainLink.setCursor("select");
+	}
 }

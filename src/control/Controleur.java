@@ -32,10 +32,12 @@ public class Controleur implements Initializable {
 	
 	
 	private int formeIdx; //Index de la forme qui est en train d'être déplacée
+	private int selIdx=-1; //Index de la forme qui est sélectionnée
 	private boolean enDeplacement=false; //Si une forme est en train d'être déplacée
 	private double x_souris, y_souris; //Coordonnées précédentes de la souris
 	private Main mainLink;
 	private Canvas currentCanvas;
+	private String currentTool ="select";
 	
 	@FXML
 	private BorderPane bp;
@@ -52,7 +54,13 @@ public class Controleur implements Initializable {
 		currentCanvas = new Canvas(x, y);
 			cWidth=x;
 			cHeight=y;
-
+		currentCanvas.setOnMouseClicked(e -> {
+	            try {
+	                put(e);
+	            } catch (Exception e1) {
+	                e1.printStackTrace();
+	            }
+	        });
 		currentCanvas.setOnMousePressed(e -> {
             try {
                 attrape(e);
@@ -105,12 +113,44 @@ public class Controleur implements Initializable {
 	public void draw() {
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0,0,this.cWidth,this.cHeight);
-		gc.setFill(Color.BLACK);
 		for (int i=0; i<modele.getSize();i++) {
 			FormeGeo f=modele.get(i);
-			f.draw(gc);
+			if (i==selIdx) {
+				gc.setFill(Color.LIGHTGREY);
+				f.draw(gc);
+			}
+			else {
+				gc.setFill(Color.BLACK);
+				f.draw(gc);
+			}
+
 		}
 	}
+	/**
+	 *Lorsque clique une fois, fais différentes actions 
+	 */
+	@FXML
+	public void put(MouseEvent e) {
+		switch (currentTool) {
+		case "select":
+			for (int i=0; i<modele.getSize();i++) {
+				FormeGeo f=modele.get(i);
+				if (f.estDedans(e.getX(), e.getY())) {
+					selIdx=i;
+					modele.setSelected(f);
+					draw();
+					break;
+				}
+			}
+
+		break;
+		case "shape":
+			break;
+		default:
+			break;
+		}
+	}
+	
 	
 	/**
 	 * Appelée quand l'utilisateur appuie sur la souris pour attraper une forme
@@ -119,16 +159,21 @@ public class Controleur implements Initializable {
 	 */
 	@FXML
 	public void attrape(MouseEvent e) {
-		for (int i=0; i<modele.getSize();i++) {
-			FormeGeo f=modele.get(i);
-			if (f.estDedans(e.getX(), e.getY())) {
-				formeIdx=i;
-				enDeplacement=true;
-				x_souris = e.getX();
-				y_souris = e.getY();
-				break;
+		if(currentTool == "move") {
+			for (int i=0; i<modele.getSize();i++) {
+				FormeGeo f=modele.get(i);
+				if (f.estDedans(e.getX(), e.getY()) && i==selIdx) {
+					formeIdx=i;
+					enDeplacement=true;
+					x_souris = e.getX();
+					y_souris = e.getY();
+					break;
+				}
 			}
 		}
+		
+		
+		
 	}
 
 	/**
@@ -175,7 +220,11 @@ public class Controleur implements Initializable {
 	
 	public Canvas getCanvas() {
 		return currentCanvas;
-		
+	}
+	
+	public void setTool(String name) {
+		currentTool=name;
+		System.out.println("Current tool is now set to : "+currentTool);
 	}
 	
 }

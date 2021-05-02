@@ -8,6 +8,7 @@ import javafx.scene.canvas.GraphicsContext;
 abstract public class FormeGeo {
 
 	protected double x,y; //Position de la forme
+	protected boolean selected=false;
 	
 	FormeGeo(double x, double y){
 		this.x=x;
@@ -17,6 +18,7 @@ abstract public class FormeGeo {
 	public double getX() {return x;}
 	
 	public double getY() {return y;}
+	
 	
 	public void setX(double x) {this.x=x;}
 	

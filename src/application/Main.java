@@ -30,7 +30,7 @@ public class Main extends Application {
 	//est un BorderPane, nous reparlerons de l'objet Stage
 	private Stage stagePrincipal;
 	private BorderPane conteneurPrincipal;
-	public Controleur ctrl;
+	private Controleur ctrl;
 
 	
 	@Override
@@ -146,7 +146,13 @@ public class Main extends Application {
 		switch (string) {
 		case "move":
 			stagePrincipal.getScene().setCursor(Cursor.MOVE);
+			ctrl.setTool(string);
 			break;
+		case "select":
+			stagePrincipal.getScene().setCursor(Cursor.DEFAULT);
+			ctrl.setTool(string);
+			break;
+
 
 		default:
 			break;
