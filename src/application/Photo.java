@@ -9,7 +9,7 @@ public class Photo extends FormeGeo{
 	private String URL;
 	
 	public Photo(double x, double y, double larg, double haut,String url) {
-		super(x,y,null);
+		super(x,y,null);//Une photo n'a pas de couleur et on utilise pas cet attribut dans draw()
 		this.larg=larg;
 		this.haut=haut;
 		URL=url;

@@ -4,13 +4,14 @@
 package application;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class Disque extends FormeGeo {
 	
 	private double rayon;
 	
-	public Disque(double x, double y, double rayon) {
-		super(x,y);
+	public Disque(double x, double y, double rayon,Color c) {
+		super(x,y,c);
 		this.rayon=rayon;
 	}
 	
@@ -26,6 +27,7 @@ public class Disque extends FormeGeo {
 	}
 	
 	public void draw(GraphicsContext gc) {
+		gc.setFill(couleur);
 		gc.fillOval(this.x, this.y, 2*this.rayon, 2*this.rayon);
 	}
 

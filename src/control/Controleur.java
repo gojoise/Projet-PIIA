@@ -101,9 +101,9 @@ public class Controleur implements Initializable {
 	 * Pour Tester avec des formes ajoutées dès le début
 	 */
 	public void init() {
-		modele.add(new Rectangle(50,50,50,30));
-		modele.add(new Disque(100,100,50));
-		modele.add(new Disque(300,200,80));
+		modele.add(new Rectangle(50,50,50,30,Color.BLUE));
+		modele.add(new Disque(100,100,50,Color.RED));
+		modele.add(new Disque(300,200,80,Color.GREEN));
 	}
 	
 	/**
@@ -116,11 +116,10 @@ public class Controleur implements Initializable {
 		for (int i=0; i<modele.getSize();i++) {
 			FormeGeo f=modele.get(i);
 			if (i==selIdx) {
-				gc.setFill(Color.LIGHTGREY);
+				f.setColor(Color.LIGHTGRAY);
 				f.draw(gc);
 			}
 			else {
-				gc.setFill(Color.BLACK);
 				f.draw(gc);
 			}
 
@@ -145,6 +144,16 @@ public class Controleur implements Initializable {
 
 		break;
 		case "shape":
+			if(mainLink.currentShape.getType()=="rectangle") {
+				Rectangle rec = new Rectangle(e.getX(), e.getY(), 40, 60,mainLink.currentShape.getColor());
+				modele.add(rec);
+				draw();
+			}
+			if(mainLink.currentShape.getType()=="disque") {
+				Disque dis= new Disque(e.getX(), e.getY(),25,mainLink.currentShape.getColor());
+				modele.add(dis);
+				draw();
+			}
 			break;
 		default:
 			break;
