@@ -116,7 +116,6 @@ public class Controleur implements Initializable {
 		for (int i=0; i<modele.getSize();i++) {
 			FormeGeo f=modele.get(i);
 			if (i==selIdx) {
-				f.setColor(Color.LIGHTGRAY);
 				f.draw(gc);
 			}
 			else {
@@ -126,7 +125,7 @@ public class Controleur implements Initializable {
 		}
 	}
 	/**
-	 *Lorsque clique une fois, fais différentes actions 
+	 *Lorsque clique une fois, fait différentes actions 
 	 */
 	@FXML
 	public void put(MouseEvent e) {
@@ -135,6 +134,7 @@ public class Controleur implements Initializable {
 			for (int i=0; i<modele.getSize();i++) {
 				FormeGeo f=modele.get(i);
 				if (f.estDedans(e.getX(), e.getY())) {
+					if(selIdx!=-1)modele.setUnSelected(modele.get(selIdx));
 					selIdx=i;
 					modele.setSelected(f);
 					draw();

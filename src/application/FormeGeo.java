@@ -11,17 +11,19 @@ abstract public class FormeGeo {
 	protected double x,y; //Position de la forme
 	protected boolean selected=false;
 	protected Color couleur;
+	protected Color memory;
 	
 	FormeGeo(double x, double y,Color c){
 		this.x=x;
 		this.y=y;
 		couleur=c;
+		memory=couleur;
 	}
 	
 	public double getX() {return x;}
 	
 	public double getY() {return y;}
-	
+	public Color getMem() {return memory;}
 	
 	public void setX(double x) {this.x=x;}
 	

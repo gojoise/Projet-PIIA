@@ -5,6 +5,8 @@ package application;
 
 import java.util.Vector;
 
+import javafx.scene.paint.Color;
+
 public class Modele {
 	private Vector<FormeGeo> tab;
 	
@@ -19,5 +21,6 @@ public class Modele {
 	
 	public void add(FormeGeo f) {tab.add(f);}
 	
-	public void setSelected(FormeGeo f ) {f.selected=true;}
+	public void setSelected(FormeGeo f ) {f.selected=true; f.setColor(Color.LIGHTGRAY);}
+	public void setUnSelected(FormeGeo f ) {f.selected=false; f.setColor(f.getMem());}
 }
