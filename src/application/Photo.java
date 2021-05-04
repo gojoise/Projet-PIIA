@@ -9,7 +9,7 @@ public class Photo extends FormeGeo{
 	private String URL;
 	
 	public Photo(double x, double y, double larg, double haut,String url) {
-		super(x,y);
+		super(x,y,null);
 		this.larg=larg;
 		this.haut=haut;
 		URL=url;

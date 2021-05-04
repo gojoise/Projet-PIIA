@@ -4,15 +4,18 @@
 package application;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 abstract public class FormeGeo {
 
 	protected double x,y; //Position de la forme
 	protected boolean selected=false;
+	protected Color couleur;
 	
-	FormeGeo(double x, double y){
+	FormeGeo(double x, double y,Color c){
 		this.x=x;
 		this.y=y;
+		couleur=c;
 	}
 	
 	public double getX() {return x;}
@@ -23,6 +26,8 @@ abstract public class FormeGeo {
 	public void setX(double x) {this.x=x;}
 	
 	public void setY(double y) {this.y=y;}
+	
+	public void setColor(Color c) {this.couleur=c;}
 	
 	/**
 	 * Vérifie qu'un point est dans la forme

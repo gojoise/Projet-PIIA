@@ -155,8 +155,10 @@ public class Main extends Application {
 			stagePrincipal.getScene().setCursor(Cursor.DEFAULT);
 			ctrl.setTool(string);
 			break;
-
-
+		case "shape":
+			stagePrincipal.getScene().setCursor(Cursor.CROSSHAIR);
+			ctrl.setTool(string);
+			break;
 		default:
 			break;
 		}
@@ -192,7 +194,7 @@ public class Main extends Application {
 
 	        // Show the dialog and wait until the user closes it
 	        dialogStage.showAndWait();
-	        System.out.println(currentShape.toString());
+	        setCursor("shape");
 	        return controller.isOkClicked();
 	    } catch (IOException e) {
 	        e.printStackTrace();

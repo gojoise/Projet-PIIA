@@ -42,12 +42,13 @@ public class Shape {
 	public String getType() {
 		return type;
 	}
-	public String getColor() {
-		if(color==Color.BLACK)return "black";
-		else if(color==Color.BLUE)return "blue";
-		else if(color==Color.RED)return "red";
-		else if(color==Color.GREEN)return "green";
-		else return "";
+	public Color getColor() {
+//		if(color==Color.BLACK)return "black";
+//		else if(color==Color.BLUE)return "blue";
+//		else if(color==Color.RED)return "red";
+//		else if(color==Color.GREEN)return "green";
+//		else return "";
+		return color;
 	}
 	
 	@Override

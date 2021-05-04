@@ -4,13 +4,14 @@
 package application;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class Rectangle extends FormeGeo {
 
 	private double larg, haut;//la largeur et la hauteur du rectangle
 	
-	public Rectangle(double x, double y, double larg, double haut) {
-		super(x,y);
+	public Rectangle(double x, double y, double larg, double haut,Color c) {
+		super(x,y,c);
 		this.larg=larg;
 		this.haut=haut;
 	}
@@ -25,6 +26,7 @@ public class Rectangle extends FormeGeo {
 	}
 	
 	public void draw(GraphicsContext gc) {
+		gc.setFill(couleur);
 		gc.fillRect(this.x,this.y,this.larg,this.haut);
 	}
 	
