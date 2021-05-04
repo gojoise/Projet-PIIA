@@ -145,12 +145,12 @@ public class Controleur implements Initializable {
 		break;
 		case "shape":
 			if(mainLink.currentShape.getType()=="rectangle") {
-				Rectangle rec = new Rectangle(e.getX(), e.getY(), 40, 60,mainLink.currentShape.getColor());
+				Rectangle rec = new Rectangle(e.getX(), e.getY(), mainLink.currentShape.getLarg(), mainLink.currentShape.getHaut(),mainLink.currentShape.getColor());
 				modele.add(rec);
 				draw();
 			}
 			if(mainLink.currentShape.getType()=="disque") {
-				Disque dis= new Disque(e.getX(), e.getY(),25,mainLink.currentShape.getColor());
+				Disque dis= new Disque(e.getX(), e.getY(),mainLink.currentShape.getRay(),mainLink.currentShape.getColor());
 				modele.add(dis);
 				draw();
 			}

@@ -8,12 +8,18 @@ public class Shape {
 	private String type = "";
 	private Color color;
 	
+	private int larg;
+	private int haut;
+	
+	private int ray;
+	
+	
 	
 	public Shape() {
 		super();
 	}
 	/**
-	 * Met
+	 * Met les champs principaux via le controleur
 	 * @param t le type transmis
 	 * @param col la couleur transmise
 	 */
@@ -39,6 +45,14 @@ public class Shape {
 		type=t;
 	}
 	
+	public void setRect(int l,int h) {
+		larg=l;
+		haut=h;
+	}
+	public void setDis(int r) {
+		ray=r;
+	}
+	
 	public String getType() {
 		return type;
 	}
@@ -50,10 +64,25 @@ public class Shape {
 //		else return "";
 		return color;
 	}
+	/**
+	 * 
+	 * @return ray
+	 */
+	public int getRay() {
+		return ray;
+	}
+	
+	public int getLarg() {
+		return larg;
+	}
+	
+	public int getHaut() {
+		return haut;
+	}
 	
 	@Override
 	public String toString() {
-		return "Type : "+type+"Couleur :"+color.toString();
+		return "Type : "+type+"Couleur :"+color.toString()+"LargeurxHauteur :"+ larg+"x"+haut;
 		
 	}
 }
