@@ -48,6 +48,11 @@ public class menuControl implements Initializable {
 		mainLink.saveFile();
 	}
 	
+	@FXML
+	public void editShape() {
+		mainLink.showEdit();
+	}
+	
 	@FXML 
 	public void setMove() {
 		mainLink.setCursor("move");
