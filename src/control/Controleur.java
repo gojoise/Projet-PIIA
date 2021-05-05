@@ -14,16 +14,12 @@ import application.Photo;
 import application.Rectangle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import application.Modele;
 public class Controleur implements Initializable {
 
 	private GraphicsContext gc; //GraphicsContext du Canvas de la vue

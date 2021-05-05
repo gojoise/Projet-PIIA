@@ -48,7 +48,9 @@ public class Main extends Application {
 		stagePrincipal.show();
 		System.out.println("done !");
 	}
-
+	/**
+	 * appelé à l'init de l'app
+	 */
 	private void initialisationConteneurPrincipal() {
 		FXMLLoader loader = new FXMLLoader();
 
@@ -63,6 +65,9 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * appelé à l'init de l'app
+	 */
 	 private void initialisationCanevas() {
 	        FXMLLoader loader = new FXMLLoader();
 	        loader.setLocation(Main.class.getResource("../vue/ZoneDessin.fxml"));
@@ -145,6 +150,10 @@ public class Main extends Application {
 	public Stage getStage() {
 		return stagePrincipal;
 	}
+	/**
+	 * 
+	 * @param string name of cursor
+	 */
 	public void setCursor(String string) {
 		switch (string) {
 		case "move":
@@ -185,20 +194,20 @@ public class Main extends Application {
 
 	        // Create the dialog Stage.
 	        Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Edit Person");
+	        dialogStage.setTitle("Edit Shape");
 	        dialogStage.initModality(Modality.WINDOW_MODAL);
 	        dialogStage.initOwner(stagePrincipal);
 	        Scene scene = new Scene(page);
 	        dialogStage.setScene(scene);
 
-	        // Set the person into the controller.
+	        // Set the shape into the controller.
 	        ShapeController controller = loader.getController();
 	        controller.setDialogStage(dialogStage);
 	        controller.setShape(currentShape);
 
 	        // Show the dialog and wait until the user closes it
 	        dialogStage.showAndWait();
-	        setCursor("shape");
+	        setCursor("shape"); //i.e set tool to shape
 	        return controller.isOkClicked();
 	    } catch (IOException e) {
 	        e.printStackTrace();

@@ -78,6 +78,7 @@ public class ShapeController {
 	     */
 		@FXML
 		private void handleOk() {
+			//on applique les caractéristiques sur notre forme.
 			shape.setFields(type.getSelectionModel().getSelectedItem(),color.getSelectionModel().getSelectedItem());
 			
 			if(type.getSelectionModel().getSelectedItem()=="rectangle") {
