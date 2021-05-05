@@ -159,6 +159,10 @@ public class Main extends Application {
 			stagePrincipal.getScene().setCursor(Cursor.CROSSHAIR);
 			ctrl.setTool(string);
 			break;
+		case "delete":
+			stagePrincipal.getScene().setCursor(Cursor.DEFAULT);
+			ctrl.setTool(string);
+			break;
 		default:
 			break;
 		}

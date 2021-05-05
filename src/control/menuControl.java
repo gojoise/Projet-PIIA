@@ -61,4 +61,8 @@ public class menuControl implements Initializable {
 	public void setSel() {
 		mainLink.setCursor("select");
 	}
+	@FXML 
+	public void delete() {
+		mainLink.setCursor("delete");
+	}
 }

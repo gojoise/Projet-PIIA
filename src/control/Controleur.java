@@ -155,6 +155,16 @@ public class Controleur implements Initializable {
 				draw();
 			}
 			break;
+		case "delete":
+			for (int i=0; i<modele.getSize();i++) {
+				FormeGeo f=modele.get(i);
+				if (f.estDedans(e.getX(), e.getY())) {
+					modele.remove(f);
+					draw();//update canvas
+					break;
+				}
+			}
+			break;
 		default:
 			break;
 		}
@@ -211,7 +221,13 @@ public class Controleur implements Initializable {
 	
 	public void putImage(Image img) {
 		double baseX=0,baseY=0;
-		Photo ph = new Photo(baseX,baseY,img.getWidth(),img.getHeight(),img.getUrl());
+		double imgHeight = img.getHeight();
+		double imgWidth = img.getWidth();
+		Photo ph = new Photo(baseX,baseY,imgWidth,imgHeight,img.getUrl());
+		
+		// Si l'hauteur ou la largeur de l'image est plus grande que le canvas on l'adapte
+		if (currentCanvas.getHeight() < imgHeight ) currentCanvas.setHeight(imgHeight);
+		if (currentCanvas.getWidth() < imgWidth ) currentCanvas.setWidth(imgWidth);
 		
 		modele.add(ph); //à ajouter pour que draw() n'oublie pas l'image
 		this.draw();//update du canvas (équivalent à repaint)
